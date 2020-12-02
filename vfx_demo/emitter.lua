@@ -9,22 +9,14 @@ function init_emitter(e)
       sin(angle)
     )
     if e.radius then
-      r = rnd_float(
-        e.radius.min,
-        e.radius.max)
+      r = get_value(e.radius)
       pos += r * dir
     end
 
-    speed = rnd_float(
-      e.speed.min,
-      e.speed.max
-    )
+    speed = get_value(e.speed)
     vel = speed * dir
     col = rnd(e.colors)
-    life = rnd_int(
-      e.p_life.min,
-      e.p_life.max
-    )
+    life = flr(get_value(e.p_life))
 
     create_particle(pos,
       vel,

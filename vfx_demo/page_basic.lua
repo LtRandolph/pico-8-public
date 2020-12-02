@@ -10,10 +10,6 @@ function pb_init(self)
         min=0,
         max=91
       },
-      speed={
-        min=0,
-        max=0
-      },
       p_life={
         min=1000,
         max=1200
@@ -40,10 +36,6 @@ function pb_init(self)
       burst=512,
       pos=vec2(64, 64),
       colors={8,9,10}, -- oranges
-      radius={
-        min=0,
-        max=0
-      },
       speed={
         min=0,
         max=2
@@ -57,10 +49,6 @@ function pb_init(self)
       burst=512,
       pos=vec2(64, 64),
       colors={2,8,14}, -- reds
-      radius={
-        min=0,
-        max=0
-      },
       speed={
         min=0,
         max=2

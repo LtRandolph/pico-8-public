@@ -10,6 +10,9 @@ __lua__
 //#include vec2.lua ===========
 #include vec2.lua
 
+//#include value.lua ===========
+#include value.lua
+
 -->8
 //#include main.lua ===========
 #include main.lua
