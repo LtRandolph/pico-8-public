@@ -33,14 +33,15 @@ function update_pages()
     init_page()
   end
 
-  if btnp(4) and
-    page_step < page.steps
-    then
-    page_step += 1
+  last = page_step
+  if (btnp(0)) page_step -= 1
+  if (btnp(1)) page_step += 1
+  page_step = clamp(page_step,
+    1, page.steps)
 
-    if page.step_change then
-      page.step_change()
-    end
+  if last != page_step and
+    page.step_change then
+    page.step_change()
   end
 
   if page.update then
