@@ -14,8 +14,21 @@ function update_particles()
 end
 
 function draw_particle(p)
-  pset(p.pos.x, p.pos.y,
-    p.col)
+  if p.size == 0 then
+    pset(p.pos.x, p.pos.y,
+      p.col)
+  else
+    if type(p.size) == "number" then
+      half_size = 0.5 *
+        vec2(p.size, p.size)
+    else
+      half_size = 0.5 * p.size
+    end
+    p_min = p.pos - half_size
+    p_max = p.pos + half_size
+    rectfill(p_min.x, p_min.y,
+      p_max.x, p_max.y, p.col)
+  end
 end
 
 function draw_particles()

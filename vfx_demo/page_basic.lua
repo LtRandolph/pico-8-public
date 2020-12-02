@@ -43,7 +43,8 @@ function pb_init(self)
       p_life={
         min=60,
         max=120
-      }
+      },
+      size=3
     },
     {
       burst=512,
@@ -57,7 +58,8 @@ function pb_init(self)
         min=60,
         max=120
       },
-      accel = vec2(0, 0.1)
+      accel = vec2(0, 0.1),
+      size=vec2(1, 5)
     }
   }
   init_emitter(

@@ -1,4 +1,5 @@
 function _init()
+  printh("_init")
   init_pages()
 end
 

@@ -21,6 +21,7 @@ function init_emitter(e)
     p.life = flr(get_value(e.p_life))
     p.accel = get_value(e.accel,
       vec2(0, 0))
+    p.size = get_value(e.size)
 
     add(particles, p)
   end
