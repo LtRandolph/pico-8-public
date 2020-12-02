@@ -39,7 +39,8 @@ function update_pages()
   page_step = clamp(page_step,
     1, page.steps)
 
-  if last != page_step and
+  if (last != page_step or
+    btnp(4)) and
     page.step_change then
     page.step_change()
   end

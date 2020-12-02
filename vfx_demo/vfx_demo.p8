@@ -24,15 +24,15 @@ __lua__
 //#include emitter.lua ========
 #include emitter.lua
 
-//#include effects.lua ========
-#include effects.lua
+//#include effect.lua ========
+#include effect.lua
 
 -->8
 //#include page_basic.lua
 #include page_basic.lua
 
-//#include pages.lua ==========
-#include pages.lua
+//#include page.lua ==========
+#include page.lua
 
 -->8
 

@@ -56,7 +56,8 @@ function pb_init(self)
       p_life={
         min=60,
         max=120
-      }
+      },
+      accel = vec2(0, 0.1)
     }
   }
   init_emitter(

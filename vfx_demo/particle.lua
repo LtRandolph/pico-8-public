@@ -1,21 +1,10 @@
-function create_particle(
-  pos, vel, life, col)
-  p = {
-    pos=pos,
-    vel=vel,
-    life=life,
-    col=col
-  }
-  add(particles, p)
-  return p
-end
-
 function update_particle(p)
   p.life -= 1
   if p.life <= 0 then
     del(particles, p)
     return
   end
+  p.vel += p.accel
   p.pos += p.vel
 end
 

@@ -2,7 +2,9 @@ function init_emitter(e)
   add(emitters, e)
 
   for i=1,(e.burst or 0) do
-    pos = e.pos
+    p = {}
+
+    p.pos = e.pos
     angle = rnd(1)
     dir = vec2(
       cos(angle),
@@ -10,19 +12,17 @@ function init_emitter(e)
     )
     if e.radius then
       r = get_value(e.radius)
-      pos += r * dir
+      p.pos += r * dir
     end
 
     speed = get_value(e.speed)
-    vel = speed * dir
-    col = rnd(e.colors)
-    life = flr(get_value(e.p_life))
+    p.vel = speed * dir
+    p.col = rnd(e.colors)
+    p.life = flr(get_value(e.p_life))
+    p.accel = get_value(e.accel,
+      vec2(0, 0))
 
-    create_particle(pos,
-      vel,
-      life,
-      col
-    )
+    add(particles, p)
   end
 end
 
