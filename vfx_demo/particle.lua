@@ -26,8 +26,14 @@ function draw_particle(p)
     end
     p_min = p.pos - half_size
     p_max = p.pos + half_size
-    rectfill(p_min.x, p_min.y,
-      p_max.x, p_max.y, p.col)
+
+    if p.sprite then
+      draw_sprite(p.sprite,
+        p_min, p_max)
+    else
+      rectfill(p_min.x, p_min.y,
+        p_max.x, p_max.y, p.col)
+    end
   end
 end
 

@@ -3,7 +3,7 @@ pages = {
     title="test",
     init=pb_init,
     step_change=pb_init,
-    steps=4
+    steps=5
   }
 }
 

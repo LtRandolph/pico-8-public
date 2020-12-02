@@ -22,6 +22,7 @@ function init_emitter(e)
     p.accel = get_value(e.accel,
       vec2(0, 0))
     p.size = get_value(e.size)
+    p.sprite = e.sprite
 
     add(particles, p)
   end

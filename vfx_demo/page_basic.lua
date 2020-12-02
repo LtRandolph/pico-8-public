@@ -60,6 +60,20 @@ function pb_init(self)
       },
       accel = vec2(0, 0.1),
       size=vec2(1, 5)
+    },
+    {
+      burst=12,
+      pos=vec2(64, 64),
+      sprite=1,
+      speed={
+        min=0,
+        max=2
+      },
+      p_life={
+        min=60,
+        max=120
+      },
+      size=vec2(16, 8)
     }
   }
   init_emitter(
