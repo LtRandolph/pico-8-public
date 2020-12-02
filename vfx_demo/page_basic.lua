@@ -33,18 +33,26 @@ function pb_init(self)
       }
     },
     {
-      burst=512,
+      burst=32,
       pos=vec2(64, 64),
       colors={8,9,10}, -- oranges
+      radius={
+        min=0,
+        max=91
+      },
       speed={
         min=0,
-        max=2
+        max=0.5
       },
       p_life={
-        min=60,
-        max=120
+        min=200,
+        max=200
       },
-      size=3
+      size=7,
+      angle={
+        min=0,
+        max=1
+      }
     },
     {
       burst=512,

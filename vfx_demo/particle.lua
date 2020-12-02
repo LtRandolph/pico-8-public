@@ -30,6 +30,9 @@ function draw_particle(p)
     if p.sprite then
       draw_sprite(p.sprite,
         p_min, p_max)
+    elseif p.angle != 0 then
+      rotated_rect(p.col,
+        p_min, p_max, p.angle)
     else
       rectfill(p_min.x, p_min.y,
         p_max.x, p_max.y, p.col)
