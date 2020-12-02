@@ -1,5 +1,5 @@
 function draw_sprite(s,
-  p_min, p_max)
+  p_min, p_max, alpha)
 
   s_min = vec2(
     8 * (s % 16),
@@ -13,6 +13,42 @@ function draw_sprite(s,
     range.x, range.y)
 end
 
+draw_sprite_alpha = draw_sprite
+draw_sprite_additive = draw_sprite
+
+function aligned_rect(col,
+  p_min, p_max, alpha)
+  rectfill(p_min.x, p_min.y,
+    p_max.x, p_max.y, col)
+end
+
+function aligned_rect_alpha(col,
+  p_min, p_max, alpha)
+  for y=p_min.y,p_max.y do
+    for x=p_min.x,p_max.x do
+      cur = pget(x,y)
+      new = lerp(
+        cur, col, alpha
+      )
+      new = round(new)
+      pset(x, y, new)
+    end
+  end
+end
+
+function aligned_rect_additive(
+  col, p_min, p_max, alpha)
+  for y=p_min.y,p_max.y do
+    for x=p_min.x,p_max.x do
+      cur = pget(x,y)
+      new = cur + col * alpha
+      new = round(new)
+      new = clamp(new, 0, 15)
+      pset(x, y, new)
+    end
+  end
+end
+
 function rotate_vec2(v, s, c,
   center)
   return center + vec2(
@@ -24,7 +60,7 @@ function rotate_vec2(v, s, c,
 end
 
 function rotated_rect(col,
-  p_min, p_max, angle)
+  p_min, p_max, angle, alpha)
   center = 0.5 * (p_max + p_min)
 
   s = sin(angle)
@@ -92,15 +128,7 @@ function rotated_rect(col,
 
     line(min_x, y, max_x, y, col)
   end
-  --[[
-  y_range = flr(p_max.y-p_min.y)
-  for t=0,y_range do
-    v1 = lerp(rot_min, rot_c1,
-      t / y_range)
-    v2 = lerp(rot_c2, rot_max,
-      t / y_range)
-
-    line(v1.x,v1.y,v2.x,v2.y,
-      col)
-  end]]
 end
+
+rotated_rect_alpha = rotated_rect
+rotated_rect_additive = rotated_rect

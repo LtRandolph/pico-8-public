@@ -28,14 +28,17 @@ function draw_particle(p)
     p_max = p.pos + half_size
 
     if p.sprite then
-      draw_sprite(p.sprite,
-        p_min, p_max)
+      blending.draw_sprite(
+        p.sprite, p_min, p_max,
+        p.alpha)
     elseif p.angle != 0 then
-      rotated_rect(p.col,
-        p_min, p_max, p.angle)
+      blending.rotated_rect(
+        p.col, p_min, p_max,
+        p.angle, p.alpha)
     else
-      rectfill(p_min.x, p_min.y,
-        p_max.x, p_max.y, p.col)
+      blending.aligned_rect(
+        p.col, p_min, p_max,
+        p.alpha)
     end
   end
 end

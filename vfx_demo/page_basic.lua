@@ -1,6 +1,8 @@
 function pb_init(self)
   reset_effects()
 
+  activate_additive_blending()
+
   local step_emitters = {
     {
       burst=512,
@@ -33,12 +35,12 @@ function pb_init(self)
       }
     },
     {
-      burst=32,
+      burst=64,
       pos=vec2(64, 64),
-      colors={8,9,10}, -- oranges
+      colors={1,3,5,8},
       radius={
         min=0,
-        max=91
+        max=15
       },
       speed={
         min=0,
@@ -49,10 +51,7 @@ function pb_init(self)
         max=200
       },
       size=7,
-      angle={
-        min=0,
-        max=1
-      }
+      alpha=1
     },
     {
       burst=512,

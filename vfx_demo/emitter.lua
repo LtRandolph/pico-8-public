@@ -24,6 +24,7 @@ function init_emitter(e)
     p.size = get_value(e.size)
     p.angle = get_value(e.angle)
     p.sprite = e.sprite
+    p.alpha = get_value(e.alpha, 1)
 
     add(particles, p)
   end
