@@ -1,7 +1,9 @@
 pages = {
     {
         title="test",
-        init=pbp_init
+        init=pbp_init,
+        step_change=pbp_init,
+        steps=4
     }
 }
 
@@ -12,6 +14,7 @@ end
 
 function init_page()
     reset_particles()
+    page_step=1
 
     pages[page_num]:init()
     page = pages[page_num]
@@ -28,6 +31,16 @@ function update_pages()
     if last != page_num or
         btnp(5) then
         init_page()
+    end
+
+    if btnp(4) and
+        page_step < page.steps
+        then
+        page_step += 1
+
+        if page.step_change then
+            page.step_change()
+        end
     end
 
     if page.update then
