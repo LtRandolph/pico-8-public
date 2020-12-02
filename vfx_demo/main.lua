@@ -1,16 +1,17 @@
 function _init()
-    init_pages()
+  init_pages()
 end
 
-function _update()
-    update_pages()
-    update_particles()
+function _update60()
+  update_pages()
+  update_emitters()
+  update_particles()
 end
 
 function _draw()
-    cls()
-    draw_particles()
-    -- draw page last so title
-    -- will overwrite particles
-    draw_pages()
+  cls()
+  draw_particles()
+  -- draw page last so title
+  -- will overwrite particles
+  draw_pages()
 end

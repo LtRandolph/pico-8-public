@@ -10,18 +10,32 @@ __lua__
 //#include vec2.lua ===========
 #include vec2.lua
 
-//#include page_basic_particles.lua
-#include page_basic_particles.lua
-
-//#include pages.lua ==========
-#include pages.lua
-
+-->8
 //#include main.lua ===========
 #include main.lua
 
 -->8
 //#include particle.lua =======
 #include particle.lua
+
+//#include emitter.lua ========
+#include emitter.lua
+
+//#include effects.lua ========
+#include effects.lua
+
+-->8
+//#include page_basic.lua
+#include page_basic.lua
+
+//#include pages.lua ==========
+#include pages.lua
+
+-->8
+
+-->8
+
+-->8
 
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
