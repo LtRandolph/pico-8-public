@@ -1,4 +1,4 @@
-function bloom()
+function draw_bloom()
 
   print("extra", 52,52,8)
   print("hot", 52,60,8)
@@ -45,4 +45,12 @@ function bloom()
         0, 15))
     end
   end
+end
+
+function add_bloom_pages()
+  add(pages, {
+    title="bloom",
+    init=activate_additive_blending,
+    draw=draw_bloom
+  })
 end

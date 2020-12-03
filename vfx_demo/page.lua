@@ -1,14 +1,8 @@
-pages = {
-  {
-    title="test",
-    init=pb_init,
-    step_change=pb_init,
-    draw=bloom,
-    steps=5
-  }
-}
-
 function init_pages()
+  pages = {}
+  add_basic_pages()
+  add_bloom_pages()
+
   page_num = 1
   init_page()
 end
@@ -17,8 +11,9 @@ function init_page()
   reset_effects()
   page_step=1
 
-  pages[page_num]:init()
   page = pages[page_num]
+
+  if (page.init) page:init()
 end
 
 function update_pages()
@@ -43,18 +38,21 @@ function update_pages()
   if (last != page_step or
     btnp(4)) and
     page.step_change then
-    page.step_change()
+    page:step_change()
+  elseif btnp(4) then
+    init_page()
   end
 
   if page.update then
-    page.update()
+    page:update()
   end
 end
 
 function draw_pages()
-  print(page.title, 1, 1, 7)
+  print(page.title, 1, 1, 
+    blending.white)
 
   if page.draw then
-    page.draw()
+    page:draw()
   end
 end

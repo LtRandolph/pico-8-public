@@ -1,19 +1,22 @@
 blending_default = {
   draw_sprite = draw_sprite,
   rotated_rect = rotated_rect,
-  aligned_rect = aligned_rect
+  aligned_rect = aligned_rect,
+  white = 7
 }
 
 blending_alpha = {
   draw_sprite = draw_sprite_alpha,
   rotated_rect = rotated_rect_alpha,
-  aligned_rect = aligned_rect_alpha
+  aligned_rect = aligned_rect_alpha,
+  white = 8
 }
 
 blending_additive = {
   draw_sprite = draw_sprite_additive,
   rotated_rect = rotated_rect_additive,
-  aligned_rect = aligned_rect_additive
+  aligned_rect = aligned_rect_additive,
+  white = 8
 }
 
 function reset_blending()
