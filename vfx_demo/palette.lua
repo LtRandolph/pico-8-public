@@ -16,6 +16,30 @@ palette_default={
   white=7
 }
 
+palette_cotton_candy={
+  0,140,12,14,14,14,7,
+  7,7,7,7,7,7,7,7,
+  white=7
+}
+
+palette_plasma={
+  0,12,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,7,
+  white=15
+}
+
+palette_smoky={
+  0,128,128,133,5,134,134,6,
+  7,7,7,7,7,7,7,7,
+  white=15
+}
+
+palette_rgb={
+  0,3,139,11,12,140,8,9,
+  135,138,136,2,141,131,7,7,
+  white=15
+}
+
 function set_palette(_pal)
   palette = _pal
   for i,c in pairs(_pal) do
