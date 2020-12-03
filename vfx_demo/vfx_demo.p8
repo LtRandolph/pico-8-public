@@ -28,18 +28,21 @@ __lua__
 #include effect.lua
 
 -->8
-//#include page_basic.lua
-#include page_basic.lua
-
-//#include page.lua ==========
-#include page.lua
-
--->8
 //#include draw_helpers.lua ==========
 #include draw_helpers.lua
 
 //#include fake_blending.lua ==========
 #include fake_blending.lua
+
+//#include bloom.lua ==========
+#include bloom.lua
+
+-->8
+//#include page_basic.lua
+#include page_basic.lua
+
+//#include page.lua ==========
+#include page.lua
 
 __gfx__
 0000000000aaaa000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000

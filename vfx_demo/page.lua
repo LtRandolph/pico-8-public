@@ -3,6 +3,7 @@ pages = {
     title="test",
     init=pb_init,
     step_change=pb_init,
+    draw=bloom,
     steps=5
   }
 }
