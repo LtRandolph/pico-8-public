@@ -1,6 +1,10 @@
 function _init()
   printh("_init")
   init_pages()
+
+  -- persist palette changes
+  -- into editor
+  poke(0x5f2e, 1)
 end
 
 function _update60()

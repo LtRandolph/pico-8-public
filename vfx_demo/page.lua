@@ -50,7 +50,7 @@ end
 
 function draw_pages()
   print(page.title, 1, 1, 
-    blending.white)
+    palette.white)
 
   if page.draw then
     page:draw()
