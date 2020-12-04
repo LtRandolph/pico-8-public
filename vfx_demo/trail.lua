@@ -39,7 +39,8 @@ function update_trail(t)
 
   for prof in all(t.prof) do
     prof.life -= 1
-    if prof.life == 0 then
+    if prof.life <= 0 and
+      #t.prof > 1 then
       del(t.prof, prof)
     end
   end
