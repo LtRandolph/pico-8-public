@@ -47,6 +47,9 @@ __lua__
 //#include page_basic.lua =====
 #include page_basic.lua
 
+//#include page_curve.lua =====
+#include page_curve.lua
+
 //#include page_emitter.lua ===
 #include page_emitter.lua
 

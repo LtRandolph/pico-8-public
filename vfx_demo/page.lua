@@ -1,6 +1,7 @@
 function init_pages()
   pages = {}
   paused = false
+  add_curve_pages()
   add_trail_pages()
   add_emitter_pages()
   add_basic_pages()

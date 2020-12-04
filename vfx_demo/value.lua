@@ -1,6 +1,9 @@
-function get_value(data, default)
+function get_value(e, p, data,
+  default)
   if data == nil then
     return default or 0
+  elseif type(data) == "function" then
+    return data(e, p)
   elseif type(data) == "number" then
     return data
   elseif data.x != nil then

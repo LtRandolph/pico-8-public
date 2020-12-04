@@ -2,6 +2,7 @@ function init_emitter(e)
   add(emitters, e)
 
   e.spawn_accum=0
+  e.alive_time=0
   if e.spawn_rate==nil then
     e.spawn_rate=0
   end
@@ -14,36 +15,42 @@ end
 function spawn_particle(e)
   p = {}
 
+  p.emitter = e
+  p.alive_time = 0
   p.pos = e.pos
   angle = rnd(1)
-  dir = vec2(
+  p.dir = vec2(
     cos(angle),
     sin(angle)
   )
   if e.radius then
-    r = get_value(e.radius)
-    p.pos += r * dir
+    r = get_value(e, p, e.radius)
+    p.pos += r * p.dir
   end
 
-  speed = get_value(e.speed)
-  p.vel = speed * dir
+  speed = get_value(e, p, e.speed)
+  p.vel = speed * p.dir
   p.col = rnd(e.colors)
-  p.life = flr(get_value(e.p_life))
-  p.accel = get_value(e.accel,
-    vec2(0, 0))
-  p.accel_noise = get_value(
+  p.life = flr(get_value(e, p,
+    e.p_life))
+  p.accel = e.accel
+  p.accel_noise = get_value(e, p,
     e.accel_noise)
-  p.size = get_value(e.size)
-  p.angle = get_value(e.angle)
+  p.size = get_value(e, p,
+    e.size)
+  p.angle = get_value(e, p,
+    e.angle)
   p.sprite = e.sprite
-  p.alpha = get_value(e.alpha, 1)
-  p.air_resist = get_value(
+  p.alpha = get_value(e, p,
+    e.alpha, 1)
+  p.air_resist = get_value(e, p,
     e.air_resist)
 
   add(particles, p)
 end
 
 function update_emitter(e)
+  e.alive_time+=1
   e.spawn_accum+=e.spawn_rate
   while e.spawn_accum > 1 do
     e.spawn_accum -= 1

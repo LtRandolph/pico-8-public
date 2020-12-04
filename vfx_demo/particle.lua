@@ -1,4 +1,5 @@
 function update_particle(p)
+  p.alive_time += 1
   if p.life > 0 then
     p.life -= 1
     if p.life == 0 then
@@ -13,10 +14,8 @@ function update_particle(p)
   if p.air_resist != 0 then
     p.vel = (1 - p.air_resist) *
       p.vel
-    p.accel = (1 - p.air_resist) *
-      p.accel
   end
-  p.vel += p.accel
+  p.vel += get_value(p.emitter, p, p.accel, vec2(0, 0))
   p.pos += p.vel
 end
 
