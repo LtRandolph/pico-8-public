@@ -47,6 +47,9 @@ __lua__
 //#include page_basic.lua =====
 #include page_basic.lua
 
+//#include page_blend.lua =====
+#include page_blend.lua
+
 //#include page_curve.lua =====
 #include page_curve.lua
 

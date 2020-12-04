@@ -21,12 +21,7 @@ function reset_blending()
   blending = blending_default
 end
 
-function activate_alpha_blending()
+function activate_blend(blend)
   set_palette(palette_blendable)
-  blending = blending_alpha
-end
-
-function activate_additive_blending()
-  set_palette(palette_blendable)
-  blending = blending_additive
+  blending = blend
 end
