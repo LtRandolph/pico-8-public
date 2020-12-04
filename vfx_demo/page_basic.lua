@@ -58,8 +58,7 @@ function add_basic_pages()
         min=200,
         max=200
       },
-      size=7,
-      alpha=1
+      size=7
     }
   })
   add(pages, {

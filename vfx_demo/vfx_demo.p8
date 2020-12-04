@@ -53,6 +53,9 @@ __lua__
 //#include page_emitter.lua ===
 #include page_emitter.lua
 
+//#include page_effect.lua ====
+#include page_effect.lua
+
 //#include page_uv.lua ========
 #include page_uv.lua
 

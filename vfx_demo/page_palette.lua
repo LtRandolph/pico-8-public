@@ -62,7 +62,6 @@ function shift_palette_plasma(self)
     self.palette[loop_index(10-plasma_index)+1]=0
     self.palette[loop_index(11-plasma_index)+1]=0
     plasma_index = loop_index(plasma_index + 1)
-    printh(plasma_index)
     self.palette[loop_index(10-plasma_index)+1]=12
     self.palette[loop_index(11-plasma_index)+1]=7
     set_palette(self.palette)
