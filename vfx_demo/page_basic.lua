@@ -119,6 +119,24 @@ function add_basic_pages()
     }
   })
   add(pages, {
+    title="dynamic force",
+    init=pb_init,
+    e={
+      spawn_rate=3,
+      pos=vec2(64, 64),
+      colors={2,8,14},
+      speed={
+        min=1,
+        max=2
+      },
+      p_life={
+        min=60,
+        max=120
+      },
+      accel=mouse_accel
+    }
+  })
+  add(pages, {
     title="collision",
     init=pb_init,
     e={
@@ -139,6 +157,13 @@ end
 function swirl_accel(e, p)
   offset = p.pos - vec2(64,64)
   accel = -0.005 * offset
+  accel += 0.002 * vec2(offset.y, -offset.x)
+  return accel
+end
+
+function mouse_accel(e, p)
+  offset = p.pos - mouse
+  accel = -0.009 * offset
   accel += 0.002 * vec2(offset.y, -offset.x)
   return accel
 end
