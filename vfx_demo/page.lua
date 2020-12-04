@@ -1,6 +1,7 @@
 function init_pages()
   pages = {}
   paused = false
+  add_screen_pages()
   add_model_pages()
   add_effect_pages()
   add_basic_pages()
