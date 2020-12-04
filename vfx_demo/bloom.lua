@@ -1,4 +1,4 @@
-function draw_bloom()
+function draw_bloom(self)
 
   print("extra", 52,52,8)
   print("hot", 52,60,8)
@@ -16,19 +16,21 @@ function draw_bloom()
   region_min=64-16
   region_max=65+16
 
+  str = (1 + cos(self.theta)) / 8
+
   for y=region_min,region_max do
     for x=region_min,region_max do
       col = pget(x-1,y-1)
       bloom_tex[y][x] += col
       if col > 7 then
-        for dy=-4,4 do
+        for dy=-6,6 do
           ny = y + dy
-          for dx=-4,4 do
+          for dx=-6,6 do
             nx = x + dx
             if ny>1 and ny<=129 and
               nx>1 and nx<=129 and
               (dx != 0 or dy != 0) then
-              alpha = 0.1 / (dx*dx +
+              alpha = str / (dx*dx +
                       dy*dy)
               bloom_tex[ny][nx] += col * alpha
             end
@@ -50,7 +52,19 @@ end
 function add_bloom_pages()
   add(pages, {
     title="bloom",
-    init=activate_additive_blending,
-    draw=draw_bloom
+    init=init_bloom,
+    draw=draw_bloom,
+    update=update_bloom
   })
+end
+
+function init_bloom(self)
+  paused = true
+  self.theta = 0.5
+  activate_additive_blending()
+end
+
+function update_bloom(self)
+  self.theta += 0.01
+  self.theta = frac(self.theta)
 end

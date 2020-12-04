@@ -9,8 +9,11 @@ end
 
 function _update60()
   update_pages()
-  update_emitters()
-  update_particles()
+
+  if not paused then
+    update_emitters()
+    update_particles()
+  end
 end
 
 function _draw()

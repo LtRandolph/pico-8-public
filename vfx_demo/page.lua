@@ -1,5 +1,6 @@
 function init_pages()
   pages = {}
+  paused = false
   add_emitter_pages()
   add_basic_pages()
   add_uv_pages()
@@ -32,21 +33,11 @@ function update_pages()
     init_page()
   end
 
-  last = page_step
-  if (btnp(0)) page_step -= 1
-  if (btnp(1)) page_step += 1
-  page_step = clamp(page_step,
-    1, page.steps)
-
-  if (last != page_step or
-    btnp(4)) and
-    page.step_change then
-    page:step_change()
-  elseif btnp(4) then
-    init_page()
+  if btnp(4) then
+    paused = not paused
   end
 
-  if page.update then
+  if not paused and page.update then
     page:update()
   end
 end
