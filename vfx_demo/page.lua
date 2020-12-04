@@ -1,5 +1,6 @@
 function init_pages()
   pages = {}
+  add_uv_pages()
   add_palette_pages()
   add_basic_pages()
   add_bloom_pages()

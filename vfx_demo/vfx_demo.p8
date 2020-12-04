@@ -44,6 +44,9 @@ __lua__
 //#include page_basic.lua =====
 #include page_basic.lua
 
+//#include page_uv.lua ========
+#include page_uv.lua
+
 //#include page_palette.lua ===
 #include page_palette.lua
 
