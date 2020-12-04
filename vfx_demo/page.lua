@@ -1,10 +1,10 @@
 function init_pages()
   pages = {}
   paused = false
+  add_basic_pages()
   add_curve_pages()
   add_trail_pages()
   add_emitter_pages()
-  add_basic_pages()
   add_uv_pages()
   add_palette_pages()
   add_bloom_pages()

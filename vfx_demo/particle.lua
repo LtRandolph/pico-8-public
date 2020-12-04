@@ -7,10 +7,6 @@ function update_particle(p)
       return
     end
   end
-  if p.accel_noise != 0 then
-    p.accel.x += rnd_float(-p.accel_noise, p.accel_noise)
-    p.accel.y += rnd_float(-p.accel_noise, p.accel_noise)
-  end
   if p.air_resist != 0 then
     p.vel = (1 - p.air_resist) *
       p.vel

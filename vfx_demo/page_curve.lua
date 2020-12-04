@@ -8,7 +8,6 @@ function add_curve_pages()
     init=pb_init,
     e={
       burst=512,
-      pos=vec2(64, 64),
       colors={1,13,12},
       radius={
         min=0,
@@ -24,7 +23,6 @@ function add_curve_pages()
     init=pb_init,
     e={
       spawn_rate=1,
-      pos=vec2(64, 64),
       colors={1,13,12},
       radius={
         min=0,

@@ -1,6 +1,7 @@
 function init_emitter(e)
   add(emitters, e)
 
+  if (e.pos==nil) e.pos = vec2(64,64)
   e.spawn_accum=0
   e.alive_time=0
   if e.spawn_rate==nil then
@@ -34,8 +35,6 @@ function spawn_particle(e)
   p.life = flr(get_value(e, p,
     e.p_life))
   p.accel = e.accel
-  p.accel_noise = get_value(e, p,
-    e.accel_noise)
   p.size = get_value(e, p,
     e.size)
   p.angle = get_value(e, p,

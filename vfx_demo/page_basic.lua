@@ -12,7 +12,6 @@ function add_basic_pages()
     init=pb_init,
     e={
       burst=512,
-      pos=vec2(64, 64),
       colors={1,13,12},
       radius={
         min=0,
@@ -26,7 +25,6 @@ function add_basic_pages()
     init=pb_init,
     e={
       burst=512,
-      pos=vec2(64, 64),
       colors={3,11,10},
       radius={
         min=0,
@@ -47,7 +45,6 @@ function add_basic_pages()
     init=pb_init,
     e={
       burst=64,
-      pos=vec2(64, 64),
       colors={8,9,10},
       radius={
         min=0,
@@ -70,7 +67,6 @@ function add_basic_pages()
     init=pb_init,
     e={
       burst=12,
-      pos=vec2(64, 64),
       sprite=1,
       speed={
         min=0,
@@ -92,7 +88,7 @@ function add_basic_pages()
     e={
       burst=512,
       pos=vec2(64, 16),
-      colors={2,8,14}, -- reds
+      colors={2,8,14},
       speed={
         min=0,
         max=2
@@ -105,20 +101,28 @@ function add_basic_pages()
     }
   })
   add(pages, {
-    title="random acceleration",
-    init=pe_init,
+    title="position-based",
+    init=pb_init,
     e={
-      burst=512,
+      spawn_rate=3,
       pos=vec2(64, 64),
-      colors={8,9,10},
-      p_life=-1,
-      radius={
-        min=0,
-        max=91
+      colors={2,8,14},
+      speed={
+        min=1,
+        max=2
       },
-      accel=vec2(0, -0.005),
-      accel_noise=0.01,
-      air_resist=0.04
+      p_life={
+        min=60,
+        max=120
+      },
+      accel=swirl_accel
     }
   })
+end
+
+function swirl_accel(e, p)
+  offset = p.pos - vec2(64,64)
+  accel = -0.005 * offset
+  accel += 0.002 * vec2(offset.y, -offset.x)
+  return accel
 end

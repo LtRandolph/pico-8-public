@@ -8,7 +8,6 @@ function add_emitter_pages()
     init=pe_init,
     e={
       burst=512,
-      pos=vec2(64, 64),
       colors={8,9,10},
       speed={
         min=0,
@@ -25,7 +24,6 @@ function add_emitter_pages()
     init=pe_init,
     e={
       spawn_rate=2.8,
-      pos=vec2(64, 64),
       colors={8,9,10},
       speed={
         min=0.5,
