@@ -4,7 +4,7 @@ function get_value(data, default)
   elseif type(data) == "number" then
     return data
   elseif data.x != nil then
-    return data
+    return data:copy()
   elseif type(data.min) == "number" then
     return rnd_float(
       data.min,

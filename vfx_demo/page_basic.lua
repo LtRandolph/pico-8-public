@@ -101,8 +101,24 @@ function add_basic_pages()
         min=60,
         max=120
       },
-      accel = vec2(0, 0.1),
-      size=vec2(1, 5)
+      accel=vec2(0, 0.1)
     }
-  })  
+  })
+  add(pages, {
+    title="random acceleration",
+    init=pe_init,
+    e={
+      burst=512,
+      pos=vec2(64, 64),
+      colors={8,9,10},
+      p_life=-1,
+      radius={
+        min=0,
+        max=91
+      },
+      accel=vec2(0, -0.005),
+      accel_noise=0.01,
+      air_resist=0.04
+    }
+  })
 end

@@ -28,6 +28,9 @@ vec2mt = {
     if (len == 0) return
     v.x /= len
     v.y /= len
+  end,
+  copy = function(v)
+    return vec2(v.x,v.y)
   end
 }
 vec2mt.__index = vec2mt
