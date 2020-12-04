@@ -23,9 +23,12 @@ function update_particles()
 end
 
 function draw_particle(p)
+  col = get_value(p.emitter, p,
+    p.col)
+
   if p.size == 0 then
     pset(p.pos.x, p.pos.y,
-      p.col)
+      col)
   else
     if type(p.size) == "number" then
       half_size = 0.5 *
@@ -35,18 +38,17 @@ function draw_particle(p)
     end
     p_min = p.pos - half_size
     p_max = p.pos + half_size
-
     if p.sprite then
       blending.draw_sprite(
         p.sprite, p_min, p_max,
         p.alpha)
     elseif p.angle != 0 then
       blending.rotated_rect(
-        p.col, p_min, p_max,
+        col, p_min, p_max,
         p.angle, p.alpha)
     else
       blending.aligned_rect(
-        p.col, p_min, p_max,
+        col, p_min, p_max,
         p.alpha)
     end
   end

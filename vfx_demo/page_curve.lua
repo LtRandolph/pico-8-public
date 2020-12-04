@@ -8,7 +8,7 @@ function add_curve_pages()
     init=pb_init,
     e={
       burst=512,
-      colors={1,13,12},
+      colors={oscillating_col_e},
       radius={
         min=0,
         max=91
@@ -23,12 +23,12 @@ function add_curve_pages()
     init=pb_init,
     e={
       spawn_rate=1,
-      colors={1,13,12},
+      colors={oscillating_col_p},
       radius={
         min=0,
         max=91
       },
-      p_life=120,
+      p_life=240,
       air_resist=0.3,
       accel=oscillating_accel_p
     }
@@ -51,4 +51,16 @@ function oscillating_accel(v)
     cos(angle),
     sin(angle)
   )
+end
+
+function oscillating_col_p(e, p)
+  return oscillating_col(p)
+end
+
+function oscillating_col_e(e, p)
+  return oscillating_col(e)
+end
+
+function oscillating_col(v)
+  return flr(9.5 + 1.5 * sin(v.alive_time / 90))
 end
