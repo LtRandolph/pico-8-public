@@ -24,6 +24,9 @@ __lua__
 //#include emitter.lua ========
 #include emitter.lua
 
+//#include trail.lua ==========
+#include trail.lua
+
 //#include effect.lua =========
 #include effect.lua
 
@@ -52,6 +55,9 @@ __lua__
 
 //#include page_palette.lua ===
 #include page_palette.lua
+
+//#include page_trail.lua =====
+#include page_trail.lua
 
 //#include page.lua ===========
 #include page.lua

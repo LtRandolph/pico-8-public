@@ -13,12 +13,14 @@ function _update60()
   if not paused then
     update_emitters()
     update_particles()
+    update_trails()
   end
 end
 
 function _draw()
   cls()
   draw_particles()
+  draw_trails()
   -- draw page last so title
   -- will overwrite particles
   draw_pages()
