@@ -51,6 +51,7 @@ function spawn_particle(e)
   p.air_resist = get_value(e, p,
     e.air_resist)
   p.update = e.p_update
+  p.draw = e.draw
 
   add(particles, p)
 end

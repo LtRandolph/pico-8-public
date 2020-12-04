@@ -85,12 +85,12 @@ function spawn_angle(e, p)
   p.vel = speed * p.dir
 end
 
+a_lines = {
+  {vec2(0, 127),vec2(64, 0)},
+  {vec2(127, 127),vec2(64, 0)},
+  {vec2(32, 64),vec2(96, 64)}
+}
 function spawn_pos(e, p)
-  a_lines = {
-    {vec2(0, 127),vec2(64, 0)},
-    {vec2(127, 127),vec2(64, 0)},
-    {vec2(32, 64),vec2(96, 64)}
-  }
   a_line = rnd(a_lines)
   p.pos = lerp(a_line[1], a_line[2],
     rnd(1))

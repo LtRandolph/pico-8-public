@@ -23,6 +23,11 @@ function update_particles()
 end
 
 function draw_particle(p)
+  if p.draw then
+    p:draw()
+    return
+  end
+
   col = get_value(p.emitter, p,
     p.col)
 
