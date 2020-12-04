@@ -21,8 +21,9 @@ function pt_update(self)
   self.omega += 0.0093
   self.t.head =
     pt_get_head_pos(self)
-    if (btnp(0)) self.t.prof_dist /= 2
-    if (btnp(1)) self.t.prof_dist *= 2
+    
+  if (btnp(0)) self.t.prof_dist /= 2
+  if (btnp(1)) self.t.prof_dist *= 2
 end
 
 function pt_draw(self)
