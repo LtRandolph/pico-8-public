@@ -59,9 +59,8 @@ function add_bloom_pages()
 end
 
 function init_bloom(self)
-  paused = true
   self.theta = 0.5
-  activate_additive_blending()
+  activate_blend(blending_additive)
 end
 
 function update_bloom(self)
