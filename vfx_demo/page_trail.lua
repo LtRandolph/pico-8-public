@@ -25,11 +25,19 @@ function pt_update(self)
     if (btnp(1)) self.t.prof_dist *= 2
 end
 
+function pt_draw(self)
+  print("profiles: "..
+    #self.t.prof,
+    1, 120, palette.white
+  )
+end
+
 function add_trail_pages()
   add(pages, {
     title="trail",
     init=pt_init,
     update=pt_update,
+    draw=pt_draw,
     def={
       prof_life=300,
       prof_dist=5,
