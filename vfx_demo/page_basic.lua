@@ -118,6 +118,22 @@ function add_basic_pages()
       accel=swirl_accel
     }
   })
+  add(pages, {
+    title="collision",
+    init=pb_init,
+    e={
+      burst=512,
+      pos=vec2(64, 64),
+      colors={2,8,14},
+      speed={
+        min=2,
+        max=4
+      },
+      p_life=-1,
+      p_update=collision_update,
+      accel=vec2(0, 0.1)
+    }
+  })
 end
 
 function swirl_accel(e, p)
@@ -125,4 +141,24 @@ function swirl_accel(e, p)
   accel = -0.005 * offset
   accel += 0.002 * vec2(offset.y, -offset.x)
   return accel
+end
+
+function collision_update(p)
+  if p.pos.x < 0 then
+    p.pos.x = -p.pos.x
+    p.vel.x = -0.9 * p.vel.x
+  end
+  if p.pos.y < 0 then
+    p.pos.y = -p.pos.y
+    p.vel.y = -0.9 * p.vel.y
+  end
+  
+  if p.pos.x > 127 then
+    p.pos.x = 127-(p.pos.x-127)
+    p.vel.x = -0.9 * p.vel.x
+  end
+  if p.pos.y > 127 then
+    p.pos.y = 127-(p.pos.y-127)
+    p.vel.y = -0.9 * p.vel.y
+  end
 end

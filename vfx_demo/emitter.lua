@@ -18,19 +18,25 @@ function spawn_particle(e)
 
   p.emitter = e
   p.alive_time = 0
-  p.pos = e.pos
-  angle = rnd(1)
-  p.dir = vec2(
-    cos(angle),
-    sin(angle)
-  )
-  if e.radius then
-    r = get_value(e, p, e.radius)
-    p.pos += r * p.dir
+
+  if e.custom_spawn then
+    e:custom_spawn(p)
+  else
+    p.pos = e.pos
+    angle = rnd(1)
+    p.dir = vec2(
+      cos(angle),
+      sin(angle)
+    )
+    if e.radius then
+      r = get_value(e, p, e.radius)
+      p.pos += r * p.dir
+    end
+
+    speed = get_value(e, p, e.speed)
+    p.vel = speed * p.dir
   end
 
-  speed = get_value(e, p, e.speed)
-  p.vel = speed * p.dir
   p.col = rnd(e.colors)
   p.life = flr(get_value(e, p,
     e.p_life))
@@ -44,6 +50,7 @@ function spawn_particle(e)
     e.alpha, 1)
   p.air_resist = get_value(e, p,
     e.air_resist)
+  p.update = e.p_update
 
   add(particles, p)
 end
@@ -55,6 +62,8 @@ function update_emitter(e)
     e.spawn_accum -= 1
     spawn_particle(e)
   end
+
+  if (e.update) e:update()
 end
 
 function update_emitters()

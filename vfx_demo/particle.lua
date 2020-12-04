@@ -13,6 +13,8 @@ function update_particle(p)
   end
   p.vel += get_value(p.emitter, p, p.accel, vec2(0, 0))
   p.pos += p.vel
+
+  if (p.update) p:update()
 end
 
 function update_particles()
