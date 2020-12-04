@@ -1,15 +1,17 @@
 function init_pages()
   pages = {}
   paused = false
-  add_screen_pages()
-  add_model_pages()
-  add_effect_pages()
   add_basic_pages()
-  add_curve_pages()
-  add_trail_pages()
-  add_emitter_pages()
   add_uv_pages()
+  add_texture_pages()
+  add_model_pages()
+  add_emitter_pages()
+  add_effect_pages()
+  add_curve_pages()
+  --add_blend_pages()
   add_palette_pages()
+  add_trail_pages()
+  add_screen_pages()
   add_bloom_pages()
 
   page_num = 1

@@ -68,6 +68,9 @@ __lua__
 //#include page_screen.lua ===
 #include page_screen.lua
 
+//#include page_texture.lua ===
+#include page_texture.lua
+
 //#include page_trail.lua =====
 #include page_trail.lua
 
