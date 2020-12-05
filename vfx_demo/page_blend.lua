@@ -5,7 +5,18 @@ end
 
 function add_blend_pages()
   add(pages, {
-    title="opaque",
+    title="blending",
+    center_title=true
+  })
+  add(pages, {
+    title="as each particle is drawn, it's\n"..
+      "broken into fragments for each\n"..
+      "pixel it may affect.",
+    draw=draw_fragments
+  })
+  add(pages, {
+    title="if the particle is opaque, each\n"..
+      "fragment overwrites the pixel.",
     init=pblend_init,
     blend=blending_alpha,
     e={
@@ -33,7 +44,9 @@ function add_blend_pages()
     }
   })
   add(pages, {
-    title="alpha blend",
+    title="but we can also do a linear\n"..
+      "interpolation, called an alpha\n"..
+      "blend.",
     init=pblend_init,
     blend=blending_alpha,
     e={
@@ -61,7 +74,8 @@ function add_blend_pages()
     }
   })
   add(pages, {
-    title="additive",
+    title="or we can add the rgb together,\n"..
+      "making the pixel brighter.",
     init=pblend_init,
     blend=blending_additive,
     e={
@@ -88,4 +102,14 @@ function add_blend_pages()
       alpha=0.5
     }
   })
+end
+
+function draw_fragments()
+  s_min = vec2(
+    8 * (20 % 16),
+    8 * (20 \ 16)
+  )
+
+  sspr(32, 8, 16, 16,
+    40, 70, 48, 48)
 end

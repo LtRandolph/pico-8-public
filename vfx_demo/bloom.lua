@@ -1,5 +1,4 @@
 function draw_bloom(self)
-
   print("extra", 52,52,8)
   print("hot", 52,60,8)
   print("text", 52,68,8)
@@ -51,7 +50,11 @@ end
 
 function add_bloom_pages()
   add(pages, {
-    title="bloom",
+    title="one of the most common screen\n"..
+      "effects is bloom. by blurring\n"..
+      "bright pixels out, we can make\n"..
+      "objects seem brighter than the\n"..
+      "screen supports.",
     init=init_bloom,
     draw=draw_bloom,
     update=update_bloom

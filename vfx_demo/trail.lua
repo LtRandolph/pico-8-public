@@ -55,7 +55,7 @@ function draw_trail(t)
   line()
   for prof in all(t.prof) do
     line(prof.pos.x, prof.pos.y)
-    color(prof.color)
+    color(get_value(t, prof, prof.color))
   end
   line(t.head.x, t.head.y)
 end

@@ -15,31 +15,47 @@ end
 
 function add_palette_pages()
   add(pages, {
-    title="grayscale",
+    title="palettes",
+    center_title=true
+  })
+  add(pages, {
+    title="a useful trick for making\n"..
+      "particles is to use a detailed\n"..
+      "grayscale texture and a color\n"..
+      "palette.",
     palette=palette_grayscale,
     init=pp_init,
     draw=pp_draw
   })
   add(pages, {
-    title="fireball",
+    title="this lets you use the same\n"..
+      "detail texture for a fireball,",
     palette=palette_blendable,
     init=pp_init,
     draw=pp_draw
   })
   add(pages, {
-    title="smoke",
+    title="a smoke cloud,",
     palette=palette_smoky,
     init=pp_init,
     draw=pp_draw
   })
   add(pages, {
-    title="cotton candy",
+    title="a bush,",
+    palette=palette_bush,
+    init=pp_init,
+    draw=pp_draw
+  })
+  add(pages, {
+    title="or cotton candy.",
     palette=palette_cotton_candy,
     init=pp_init,
     draw=pp_draw
   })
   add(pages, {
-    title="plasma",
+    title="if you change the palette over\n"..
+      "time, you can even make plasma\n"..
+      "arcs.",
     palette=palette_plasma,
     init=pp_init,
     draw=pp_draw,

@@ -4,7 +4,13 @@ end
 
 function add_emitter_pages()
   add(pages, {
-    title="burst",
+    title="emitters",
+    center_title=true
+  })
+  add(pages, {
+    title="particles are spawned by\n"..
+      "emitters or particle systems.\n"..
+      "maybe in a burst",
     init=pe_init,
     e={
       burst=512,
@@ -20,7 +26,7 @@ function add_emitter_pages()
     }
   })
   add(pages, {
-    title="spawn rate",
+    title="or maybe over time.",
     init=pe_init,
     e={
       spawn_rate=2.8,
@@ -36,7 +42,25 @@ function add_emitter_pages()
     }
   })
   add(pages, {
-    title="spawn angle",
+    title="the emitter controls each new\n"..
+      "particle's position",
+    init=pe_init,
+    e={
+      spawn_rate=2.8,
+      colors={8,9,10},
+      p_life={
+        min=60,
+        max=120
+      },
+      speed={
+        min=0.03,
+        max=0.1
+      },
+      custom_spawn=spawn_pos
+    }
+  })
+  add(pages, {
+    title="and velocity.",
     init=pe_init,
     e={
       spawn_rate=2.8,
@@ -52,23 +76,6 @@ function add_emitter_pages()
       custom_spawn=spawn_angle,
       accel = vec2(0, 0.1),
       angle = 0
-    }
-  })
-  add(pages, {
-    title="spawn position",
-    init=pe_init,
-    e={
-      spawn_rate=2.8,
-      colors={8,9,10},
-      p_life={
-        min=60,
-        max=120
-      },
-      speed={
-        min=0.03,
-        max=0.1
-      },
-      custom_spawn=spawn_pos
     }
   })
 end

@@ -13,6 +13,7 @@ function init_pages()
   add_trail_pages()
   add_screen_pages()
   add_bloom_pages()
+  add_credits_page()
 
   page_num = 1
   init_page()
@@ -50,8 +51,15 @@ function update_pages()
 end
 
 function draw_pages()
-  print(page.title, 1, 1, 
-    palette.white)
+  if page.title then
+    if page.center_title then
+      print(page.title, 1, 60, 
+        palette.white)
+    else
+      print(page.title, 1, 1, 
+        palette.white)
+    end
+  end
 
   if page.draw then
     page:draw()

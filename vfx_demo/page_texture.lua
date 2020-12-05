@@ -4,14 +4,19 @@ end
 
 function add_texture_pages()
   add(pages, {
-    title="texture",
+    title="interpolating texture coords\n"..
+      "(aka uvS) lets us draw textures.",
     init=pb_init,
     e={
-      burst=12,
+      spawn_rate=0.1,
       sprite=1,
       speed={
         min=0,
         max=2
+      },
+      radius={
+        min=0,
+        max=12
       },
       p_life={
         min=60,

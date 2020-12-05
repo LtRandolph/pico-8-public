@@ -4,7 +4,28 @@ end
 
 function add_curve_pages()
   add(pages, {
-    title="system time",
+    title="curves",
+    center_title=true
+  })
+  add(pages, {
+    title="a valuable tool for making\n"..
+      "effects is curves. these let us\n"..
+      "input a parameter to get a value\n"..
+      "for a particle or emitter.",
+    draw=draw_curve
+  })
+  add(pages, {
+    title="inputs are things like time,\n"..
+      "speed, position, or random\n"..
+      "numbers.\n\n"..
+      "outputs are any of the values on\n"..
+      "the emitter or particle, like\n"..
+      "color, size, or angle.",
+    draw=draw_curve
+  })
+  add(pages, {
+    title="we can affect all particles from\n"..
+      "an emitter at the same time",
     init=pb_init,
     e={
       burst=512,
@@ -19,7 +40,8 @@ function add_curve_pages()
     }
   })
   add(pages, {
-    title="particle time",
+    title="or have each particle check the\n"..
+      "curve for themselves.",
     init=pb_init,
     e={
       spawn_rate=1,
@@ -63,4 +85,21 @@ end
 
 function oscillating_col(v)
   return flr(9.5 + 1.5 * sin(v.alive_time / 90))
+end
+
+function draw_curve()
+  color(palette.white)
+  line()
+  line(16, 55)
+  line(16, 110)
+  line(71, 110)
+  print("o\nu\nt\np\nu\nt",12, 64)
+  print("input", 35, 112)
+
+  color(10)
+  line()
+  for i=17,71 do
+    y = (1 + sin(i / 25)) / 2
+    line(i, lerp(110, 55, y))
+  end
 end

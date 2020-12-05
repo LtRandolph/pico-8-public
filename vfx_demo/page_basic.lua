@@ -4,11 +4,17 @@ end
 
 function add_basic_pages()
   add(pages, {
-    title="blank",
-    e={}
+    title="particles",
+    center_title=true
   })
   add(pages, {
-    title="pixels",
+    title="our goal is to fill the screen\n"..
+      "with thousands or millions of\n"..
+      "rgb pixels."
+  })
+  add(pages, {
+    title="we can draw pixels in space.\n"..
+      "these are called particles.",
     init=pb_init,
     e={
       burst=512,
@@ -21,7 +27,7 @@ function add_basic_pages()
     }
   })
   add(pages, {
-    title="motion",
+    title="we can move them around",
     init=pb_init,
     e={
       burst=512,
@@ -41,11 +47,11 @@ function add_basic_pages()
     }
   })
   add(pages, {
-    title="size",
+    title="stretch them out",
     init=pb_init,
     e={
       burst=64,
-      colors={8,9,10},
+      colors={5,6,7},
       radius={
         min=0,
         max=15
@@ -62,10 +68,36 @@ function add_basic_pages()
     }
   })
   add(pages, {
-    title="acceleration",
+    title="and rotate them.",
     init=pb_init,
     e={
-      burst=512,
+      burst=64,
+      colors={8,9,10},
+      radius={
+        min=0,
+        max=15
+      },
+      speed={
+        min=0,
+        max=0.5
+      },
+      p_life={
+        min=200,
+        max=200
+      },
+      size=7,
+      angle={
+        min=0,
+        max=1
+      }
+    }
+  })
+  add(pages, {
+    title="acceleration makes their motion\n"..
+      "more visually interesting.",
+    init=pb_init,
+    e={
+      burst=128,
       pos=vec2(64, 16),
       colors={2,8,14},
       speed={
@@ -76,16 +108,38 @@ function add_basic_pages()
         min=60,
         max=120
       },
-      accel=vec2(0, 0.1)
+      accel=vec2(0, 0.1),
+      size=3
     }
   })
   add(pages, {
-    title="position-based",
+    title="their acceleration can take\n"..
+      "their position into account",
     init=pb_init,
     e={
-      spawn_rate=3,
+      spawn_rate=2,
       pos=vec2(64, 64),
-      colors={2,8,14},
+      colors={1,12,7},
+      speed={
+        min=0.5,
+        max=1
+      },
+      p_life={
+        min=60,
+        max=120
+      },
+      accel=swirl_accel,
+      size=3
+    }
+  })
+  add(pages, {
+    title="as well as the position of\n"..
+      "other objects.",
+    init=pb_init,
+    e={
+      spawn_rate=2,
+      pos=vec2(64, 64),
+      colors={11,12,13},
       speed={
         min=1,
         max=2
@@ -94,56 +148,41 @@ function add_basic_pages()
         min=60,
         max=120
       },
-      accel=swirl_accel
+      accel=mouse_accel,
+      size=3
     }
   })
   add(pages, {
-    title="dynamic force",
+    title="we can even bump into those\n"..
+      "other objects.",
     init=pb_init,
     e={
-      spawn_rate=3,
+      burst=128,
       pos=vec2(64, 64),
-      colors={2,8,14},
-      speed={
-        min=1,
-        max=2
-      },
-      p_life={
-        min=60,
-        max=120
-      },
-      accel=mouse_accel
-    }
-  })
-  add(pages, {
-    title="collision",
-    init=pb_init,
-    e={
-      burst=512,
-      pos=vec2(64, 64),
-      colors={2,8,14},
+      colors={11,15,10},
       speed={
         min=2,
         max=4
       },
       p_life=-1,
       p_update=collision_update,
-      accel=vec2(0, 0.1)
+      accel=vec2(0, 0.1),
+      size=3
     }
   })
 end
 
 function swirl_accel(e, p)
   offset = p.pos - vec2(64,64)
-  accel = -0.005 * offset
-  accel += 0.002 * vec2(offset.y, -offset.x)
+  accel = -0.001 * offset
+  accel += 0.0015 * vec2(offset.y, -offset.x)
   return accel
 end
 
 function mouse_accel(e, p)
   offset = p.pos - mouse
-  accel = -0.009 * offset
-  accel += 0.002 * vec2(offset.y, -offset.x)
+  accel = -0.004 * offset
+  accel += 0.001 * vec2(offset.y, -offset.x)
   return accel
 end
 

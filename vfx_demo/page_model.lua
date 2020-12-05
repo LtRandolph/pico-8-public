@@ -4,7 +4,9 @@ end
 
 function add_model_pages()
   add(pages, {
-    title="model",
+    title="for even more complex particles,\n"..
+      "we can draw a full model for\n"..
+      "each particle.",
     init=pm_init,
     e={
       spawn_rate=0.25,

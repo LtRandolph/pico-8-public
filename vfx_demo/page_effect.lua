@@ -7,6 +7,11 @@ end
 function add_effect_pages()
   add(pages, {
     title="effects",
+    center_title=true
+  })
+  add(pages, {
+    title="we can group multiple emitters\n"..
+      "into an effect.",
     init=peff_init,
     e={
       { -- fire
@@ -54,5 +59,10 @@ function add_effect_pages()
         accel=vec2(0, -0.05)
       },
     }
+  })
+  add(pages, {
+    title="often in games, effects will\n"..
+      "also have sounds, and even spawn\n"..
+      "new game objects."
   })
 end

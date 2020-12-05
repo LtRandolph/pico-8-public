@@ -9,7 +9,14 @@ end
 
 function add_uv_pages()
   add(pages, {
-    title="triangle uv",
+    title="shapes",
+    center_title=true
+  })
+  add(pages, {
+    title="in order to draw more fancy\n"..
+      "particles, we need to\n"..
+      "interpolate values across\n"..
+      "triangles.",
     init=puv_init,
     draw=puv_draw
   })
