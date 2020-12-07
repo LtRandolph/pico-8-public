@@ -40,18 +40,18 @@ __lua__
 //#include fake_blending.lua ==
 #include fake_blending.lua
 
-//#include bloom.lua ==========
-#include bloom.lua
-
 -->8
 //#include page_basic.lua =====
 #include page_basic.lua
 
-//#include page_blend.lua =====
-#include page_blend.lua
+//#include page_uv.lua ========
+#include page_uv.lua
 
-//#include page_curve.lua =====
-#include page_curve.lua
+//#include page_texture.lua ===
+#include page_texture.lua
+
+//#include page_model.lua =====
+#include page_model.lua
 
 //#include page_emitter.lua ===
 #include page_emitter.lua
@@ -59,23 +59,23 @@ __lua__
 //#include page_effect.lua ====
 #include page_effect.lua
 
-//#include page_model.lua =====
-#include page_model.lua
+//#include page_curve.lua =====
+#include page_curve.lua
 
-//#include page_uv.lua ========
-#include page_uv.lua
+//#include page_blend.lua =====
+#include page_blend.lua
 
 //#include page_palette.lua ===
 #include page_palette.lua
 
+//#include page_trail.lua =====
+#include page_trail.lua
+
 //#include page_screen.lua ====
 #include page_screen.lua
 
-//#include page_texture.lua ===
-#include page_texture.lua
-
-//#include page_trail.lua =====
-#include page_trail.lua
+//#include page_bloom.lua =====
+#include page_bloom.lua
 
 //#include credits.lua ========
 #include credits.lua

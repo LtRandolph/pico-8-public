@@ -134,7 +134,7 @@ function add_basic_pages()
   })
   add(pages, {
     title="as well as the position of\n"..
-      "other objects.",
+      "other objects. (mouse)",
     init=pb_init,
     e={
       spawn_rate=2,
