@@ -1,0 +1,13 @@
+ps={
+    start=function()
+    end,
+    stop=function()
+    end,
+    update=function()
+    end,
+    checkTransition=function()
+    end,
+    draw=function()
+    end
+}
+ps.__index=ps

@@ -1,0 +1,21 @@
+function showInstructions()
+    showTextScreen(instructionStrings)
+end
+
+instructionStrings=
+[[jEM FELL THROUGH A PORTAL TO A
+STRANGE, ALIEN WORLD.
+
+hER COLLEAGUES - vAN AND eSS -
+ARE WORKING TO GET BACK HOME.
+
+hELP jEM EXPLORE THIS WORLD
+AND PROTECT HER FRIENDS.
+
+- jUMP WITH 🅾️.
+- wHIP WITH ❎.
+- tRY WHIPPING EVERYTHING.
+- wHEN ADJUSTING DEVICES:
+  🅾️ CHANGES TYPE, ARROWS AIM.
+- oN GRAPPLE POINT:
+  ❎ TO ENTER ADJUST MODE.;3;25]]
