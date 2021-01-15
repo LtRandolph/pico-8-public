@@ -1,9 +1,7 @@
-grapCollision=rectString("-0.25,-0.25,0.25,0.25")
-
 function createGrap(pos,type)
     grap={
         pos=pos,
-        collisionRect=grapCollision,
+        collisionRect=unitRect,
         type=grapBasic,
         minimapColor=11
     }
@@ -27,7 +25,7 @@ function setGrapType(grap,type)
         add(grapMods,grapMod)
     end
     grap.type=type
-    grap.anim=startAnim(type.anim,-1)
+    grap.anim=startAnim(type.anim)
 end
 
 grapBasic={

@@ -1,7 +1,7 @@
 psGrapMod={
     start=function()        
         player.facing=sgn(playerGrap.pos.x-player.pos.x)
-        _update60=updateOnlyPlayer
+        _update60=updateInput
     end,
     stop=function()
         _update60=updateDefault

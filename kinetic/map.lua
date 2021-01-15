@@ -2,21 +2,15 @@ function initMap(mapRect)
     mapMinX,mapMinY,mapMaxX,mapMaxY=unpack(split(mapRect))
     mapWidth=mapMaxX-mapMinX
     mapHeight=mapMaxY-mapMinY
+    mapCenterX=mapMinX+0.5*mapWidth
     tileInfos={}
-
-    jumpUp,
-    jumpDown,
-    jumpMinWidth,
-    jumpMaxWidth,
-    fallHeight,
-    barrierScore=unpack(split("3,3,2,4,4,0"))
 
     doToAllTiles(mapFirstPass)
     doToAllTiles(placeMapObjects)
-    enemyDir=sgn((exitDoor.pos-entryDoor.pos).x)
+    enemyDir=currentLevel.dir
     doToAllTiles(findGround)
     doToAllTiles(findNext)
-    recurseValidPath(exitDoor.pos:floored())
+    recursePath(exitDoor.pos:floored())
     doToAllTiles(prunePath)
     initPlayer()
 end
@@ -78,7 +72,7 @@ end
 function createDoor(pos,entry,sprite)
     door={
         pos=pos,
-        anim=startAnim(sprite,-1),
+        anim=startAnim(sprite),
         entry=entry,
         minimapColor=6
     }
@@ -103,7 +97,7 @@ function mapFirstPass(v)
         pos=v,
         nextTiles={},
         prevTiles={},
-        couldJumpFromTiles={},
+        jumpSources={},
         barrierAllowed=tile==0,
     }
     tileInfos[x][y]=tileInfo
@@ -132,10 +126,8 @@ function canMakeJump(startTile,endTile)
 
         if (#vel>=#(currentPos-endPos)) break
         currentRect=testRect+currentPos
-        posDelta,clearAxes=collideMove(currentRect,vel)
-        if (#clearAxes!=0) return false
-
-        currentPos+=posDelta
+        currentPos+=collideMove(currentRect,vel)
+        if (#collidedAxes>0) return false
     end
 
     return true
@@ -163,26 +155,26 @@ function findNext(v)
     end
 
     if considerFall then
-        for dy=1,fallHeight do
+        for dy=1,4 do
             downTilePos=nextTilePos+vec2(0,dy)
             downTileInfo=getTileInfo(downTilePos)
             if (downTileInfo and downTileInfo.isGround) markPathSegment(tileInfo,downTileInfo)
         end
     end
 
-    lowestJumpDelta=considerJumpNotUp and jumpDown or -1
-    for dx=jumpMinWidth,jumpMaxWidth do
-        for dy=-jumpUp,lowestJumpDelta do
+    lowestJumpDelta=considerJumpNotUp and 3 or -1
+    for dx=2,4 do
+        for dy=-3,lowestJumpDelta do
             jumpTilePos=v+vec2(dx*enemyDir,dy)
             jumpTileInfo=getTileInfo(jumpTilePos)
             if jumpTileInfo and jumpTileInfo.isGround then
-                add(jumpTileInfo.couldJumpFromTiles,v)
+                add(jumpTileInfo.jumpSources,v)
             end
         end
     end
 end
 
-function recurseValidPath(tilePos)
+function recursePath(tilePos)
     local tileInfo=getTileInfo(tilePos)
     if (tileInfo.validPathStep) return
 
@@ -195,13 +187,13 @@ function recurseValidPath(tilePos)
                 tileInfos[tilePos.x][y].barrierAllowed=false
             end
         end
-        recurseValidPath(prevTile)
+        recursePath(prevTile)
     end
     
-    for jumpTilePos in all(tileInfo.couldJumpFromTiles) do
+    for jumpTilePos in all(tileInfo.jumpSources) do
         if canMakeJump(jumpTilePos,tilePos) then
             markPathSegment(getTileInfo(jumpTilePos),tileInfo)
-            recurseValidPath(jumpTilePos)
+            recursePath(jumpTilePos)
         end
     end
 end
@@ -212,7 +204,7 @@ function prunePath(v)
         nextTileInfo=getTileInfo(nextTilePos)
         if (not nextTileInfo.validPathStep) del(tileInfo.nextTiles,nextTilePos)
     end
-    tileInfo.couldJumpFromTiles=nil
+    tileInfo.jumpSources=nil
 end
 
 tileCreation={

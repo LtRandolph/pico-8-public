@@ -13,14 +13,13 @@ psWhip={
         player.whipEnd=nil
     end,
     update=function()
-        player.whippingTicks-=1
-
-        dx=0
+        player.whippingTicks-=btn(btnWhip) and 0.5 or 1
 
         if pAirFrames>0 then
             player.vel.y=min(player.vel.y+psAir.getGravity(),0.25)
             pControl(0.005,0,0.00625,true)
         else
+            dx=0
             pControl(0.00625,0.01,0.00625)
         end
 
@@ -30,24 +29,24 @@ psWhip={
         end
     end,
     checkTransition=function()
-        if (player.whippingTicks==0) return pAirFrames>0 and psAir or psGround
+        if (player.whippingTicks<=0) return pAirFrames>0 and psAir or psGround
 
         if player.whipEnd then
             whipRect=player.facing>0 and rectangle(player.pos,player.whipEnd) or rectangle(player.whipEnd,player.pos)
             collideType(player,enemies,whipEnemy,whipRect)
-            if whipRect:overlaps(getCollisionRect(waveButton)) then
+            if whipRect:overlaps(collisRect(waveButton)) then
                 whipWaveButton()
                 return
             end
             for machine in all(machines) do
-                if whipRect:overlaps(getCollisionRect(machine)) then
+                if whipRect:overlaps(collisRect(machine)) then
                     whipMachine=machine
                     sfx(35)
                     return psAdjustMachine
                 end
             end
             for grap in all(graps) do
-                if whipRect:overlaps(getCollisionRect(grap)) then
+                if whipRect:overlaps(collisRect(grap)) then
                     playerGrap=grap
                     sfx(35)
                     return psGrap

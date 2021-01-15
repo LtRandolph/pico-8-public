@@ -1,9 +1,5 @@
-function showInstructions()
-    showTextScreen(instructionStrings)
-end
-
-instructionStrings=
-[[jEM FELL THROUGH A PORTAL TO A
+function instructions()
+    showTextScreen([[jEM FELL THROUGH A PORTAL TO A
 STRANGE, ALIEN WORLD.
 
 hER COLLEAGUES - vAN AND eSS -
@@ -18,4 +14,5 @@ AND PROTECT HER FRIENDS.
 - wHEN ADJUSTING DEVICES:
   🅾️ CHANGES TYPE, ARROWS AIM.
 - oN GRAPPLE POINT:
-  ❎ TO ENTER ADJUST MODE.;3;25]]
+  ❎ TO ENTER ADJUST MODE.;3;25]])
+end

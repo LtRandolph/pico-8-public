@@ -1,9 +1,5 @@
 function showCredits()
-    showTextScreen(creditStrings)
-end
-
-creditStrings=
-[[a GAME BY;46;27
+    showTextScreen([[a GAME BY;46;27
 |bILL cLARK;44;34
 |cONCEPT aRT;43;45
 |kIT sEATON;44;52
@@ -13,4 +9,5 @@ creditStrings=
 |sARAH AND jONATHAN;28;88
 |tHANKS FOR PLAYING!
 cOME SAY HI:
-DISCORD.GG/ezgfcd5;25;103]]
+DISCORD.GG/ezgfcd5;25;103]])
+end

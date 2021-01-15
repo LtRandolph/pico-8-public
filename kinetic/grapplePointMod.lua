@@ -11,7 +11,7 @@ function flipVelY(grapMod,collider)
     return true
 end
 
-function passThroughPortal(grapMod,collider)
+function portal(grapMod,collider)
     otherType=grapMod.type==portalA and portalB or portalA
     nearest=nil
     nearestDist=1000
@@ -50,14 +50,14 @@ end
 grappleModColRect=rectString("-0.375,-0.375,0.375,0.375")
 
 portalA={
-    collisionResponse=passThroughPortal,
+    collisionResponse=portal,
     numbers=
 [[anim=19
 modSfx=55]]
 }
 
 portalB={
-    collisionResponse=passThroughPortal,
+    collisionResponse=portal,
     numbers=
 [[anim=20
 modSfx=55]]
@@ -72,7 +72,7 @@ function makeThruster(animNum,x,y)
     }
 end
 
-allGrapTypes={
+allGraps={
     grapBasic,
     {
         collisionRect=rectString("-0.25,-0.5,0.25,0.5"),
@@ -95,4 +95,4 @@ modSfx=54]]
     makeThruster(277,0,1),
     makeThruster(-22,-0.5,0)
 }
-foreach(allGrapTypes,parseNumbers)
+foreach(allGraps,parseNumbers)

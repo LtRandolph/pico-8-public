@@ -30,5 +30,3 @@ function parseNumbers(table)
     end
     table.numbers=nil
 end
-
-pi=3.14159

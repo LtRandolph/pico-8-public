@@ -1,5 +1,3 @@
-blockCollision=rectString("-0.5,-0.5,0.5,0.5")
-
 function blockSearch(proj)
     tilePos=proj.pos:floored()
     if mget(tilePos.x,tilePos.y)==38 and
@@ -13,7 +11,15 @@ function updateBlock(block)
 end
 
 function blockMachines()
-    foreach(machines,blockMachine)
+    candidateMachines={}
+    for machine in all(machines) do
+        add(candidateMachines,machine)
+    end
+    for i=1,currentLevel.blockCount do
+        machine=rnd(candidateMachines)
+        blockMachine(machine)
+        del(candidateMachines,machine)
+    end
 end
 
 function blockMachine(machine)
@@ -28,7 +34,7 @@ end
 function createBlock(pos)
     block={
         pos=pos,
-        collisionRect=blockCollision,
+        collisionRect=unitRect,
         anim=startAnim("39,40,41",10,true),
         minimapColor=13,
         update=updateBlock

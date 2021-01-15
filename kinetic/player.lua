@@ -19,7 +19,7 @@ function initPlayer()
     player={
         pos=pSpawnPos,
         vel=vec2(0,0),
-        anim=startAnim(pAnimWalk,-1),
+        anim=startAnim(pAnimWalk),
         facing=-enemyDir,
         collisionRect=pCollision,
         minimapColor=7
@@ -28,7 +28,7 @@ function initPlayer()
     pAirFrames=0
     pState.start()
     
-    player.pos+=collideMove(getCollisionRect(player),vec2(0,0.125))
+    player.pos+=collideMove(collisRect(player),vec2(0,0.125))
 end
 
 function updatePlayer()
@@ -36,7 +36,7 @@ function updatePlayer()
     if (btn(0)) dx-=1
     if (btn(1)) dx+=1
 
-    onGround=collideWithMap(getCollisionRect(player),vec2(0,0.01),3)
+    onGround=collideWithMap(collisRect(player),vec2(0,0.01),3)
 
     if onGround then
         player.immuneToEnemies=false
@@ -57,7 +57,7 @@ function updatePlayer()
 
     newState=pState.checkTransition()
     if newState then
-        pTransitionState(newState)
+        pTransition(newState)
     end
 
     pState.update()
@@ -65,7 +65,7 @@ function updatePlayer()
     updateAnim(player.anim)
 end
 
-function pTransitionState(newState)
+function pTransition(newState)
     pState.stop()
     pLastState=pState
     pState=newState
@@ -117,11 +117,7 @@ function pControl(accel,decel,turnAccel,canGoExtraFast)
         player.vel.x+=dx*min(maxSpeed-abs(player.vel.x),accel)
     end
 
-    posDelta,clearAxes=collideMove(getCollisionRect(player),player.vel,3)
-    player.pos+=posDelta
-
-    if (clearAxes.x!=0) player.vel.x=0
-    if (clearAxes.y!=0) player.vel.y=0
+    player.pos+=collideMove(collisRect(player),player.vel,3)
 
     if not player.lockFacing then
         if dx!=0 then
@@ -134,6 +130,6 @@ function pCollideWithEnemy(enemy,p)
     if (player.immuneToEnemies or _update60!=updateDefault) return
     player.immuneToEnemies=true
     player.vel=vec2(0.2*sgn(player.pos.x-enemy.pos.x),-0.3)
-    pTransitionState(psAir)
+    pTransition(psAir)
     sfx(37)
 end

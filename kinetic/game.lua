@@ -1,9 +1,8 @@
 function _init()
     showTitleScreen()
     cartdata("ltrandolph_kinetic")
-    highestBeatenLevel=dget(0)
-    perfectLevelMask=dget(1)
-    --menuitem(3,"fill blocks",blockMachines)
+    beatLevel=dget(0)
+    perfectLevels=dget(1)
     menuitem(4,"swap buttons",swapButtons)
     menuitem(5,"reset progress",resetProgress)
 end
@@ -36,7 +35,6 @@ function beginGame(level)
     _draw=drawDefault
 
     terrainObjects=blocks
-    -- no button repeat
     poke(0x5f5c,255)
     
     music(0,0,3)
@@ -52,10 +50,10 @@ function swapButtons()
 end
 
 function resetProgress()
-    highestBeatenLevel=0
-    dset(0,highestBeatenLevel)
-    perfectLevelMask=0
-    dset(1,perfectLevelMask)
+    beatLevel=0
+    dset(0,beatLevel)
+    perfectLevels=0
+    dset(1,perfectLevels)
 end
 
 function restartLevel()
@@ -68,12 +66,12 @@ function victory()
     levelOver=true
     currentLevelIndex=indexOf(levels,currentLevel)
     if lives==currentLevel.lives then
-        perfectLevelMask|=1<<currentLevelIndex
-        dset(1,perfectLevelMask)
+        perfectLevels|=1<<currentLevelIndex
+        dset(1,perfectLevels)
     end
-    justWon=highestBeatenLevel<currentLevelIndex and currentLevelIndex==#levels
-    highestBeatenLevel=max(highestBeatenLevel,currentLevelIndex)
-    dset(0,highestBeatenLevel)
+    justWon=beatLevel<currentLevelIndex and currentLevelIndex==#levels
+    beatLevel=max(beatLevel,currentLevelIndex)
+    dset(0,beatLevel)
 end
 
 function defeat()
@@ -107,7 +105,7 @@ function updateDefault()
     updateCamera()
 end
 
-function updateOnlyPlayer()
+function updateInput()
     updatePlayer()
     updateCamera()
 end

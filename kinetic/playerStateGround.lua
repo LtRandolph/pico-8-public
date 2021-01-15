@@ -19,7 +19,7 @@ psGround={
         if moveAnim and (moveAnim!=player.anim.sourceAnim or player.anim.frameTime<0) then
             player.anim=startAnim(moveAnim,12)
         elseif dx==0 and player.vel.x==0 then
-            player.anim=startAnim(moveAnim,-1)
+            player.anim=startAnim(moveAnim)
         end
     end,
     checkTransition=function()

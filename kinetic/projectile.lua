@@ -18,17 +18,17 @@ function createProj(pos,vel,sourceMachine,def,isDummy)
 end
 
 function updateProj(proj)
-    updateProjLifetime(proj)
+    projLife(proj)
     if (proj.dead) return
 
     proj.vel.y+=proj.gravity
 
-    collisionRect=getCollisionRect(proj)
-    collided,collideT,collideNormal=collideWithMap(collisionRect,proj.vel,3)
+    collisionRect=collisRect(proj)
+    collided,t,normal=collideWithMap(collisionRect,proj.vel,3)
 
     if collided then
-        collisionPos=proj.pos+collideT*proj.vel
-        proj:terrainCollision(collisionPos,collideNormal)
+        collisionPos=proj.pos+t*proj.vel
+        proj:hitTerrain(collisionPos,normal)
         return
     end
 
@@ -44,7 +44,7 @@ function updateProj(proj)
 end
 
 function projDeathEffect(proj,hitEnemy,pos)
-    createEffect(4,EDPixelSpray(pos,proj.impactEffectColors,vec2(1,0),1,0.05,0.12,5.5,8))
+    createEffect(4,EDPixelSpray(pos,proj.effectColors,vec2(1,0),1,0.05,0.12,5.5,8))
     if (not proj.isDummy) sfx(hitEnemy and proj.hitSfx or proj.missSfx)
 end
 
@@ -63,7 +63,7 @@ function projHitEnemy(enemy,proj)
 end
 
 function sparkTerrain(proj,collisionPos,collisionNormal)
-    proj.speed=allMachineTypes[4].launchSpeed
+    proj.speed=allMachs[4].launchSpeed
     if (collisionNormal.x!=0) proj.vel.x=0
     if (collisionNormal.y!=0) proj.vel.y=0
     if (#proj.vel==0) proj.vel=vec2(collisionNormal.y,collisionNormal.x)
@@ -75,10 +75,10 @@ function sparkTerrain(proj,collisionPos,collisionNormal)
 end
 
 function updateSpark(proj)
-    updateProjLifetime(proj)
+    projLife(proj)
     if (proj.dead) return
     
-    collisionRect=getCollisionRect(proj)
+    collisionRect=collisRect(proj)
     if collideWithMap(collisionRect,proj.vel,3) then
         swapVal=proj.vel
         proj.vel=-proj.down
@@ -98,7 +98,7 @@ function updateSpark(proj)
     updateAnim(proj.anim)
 end
 
-function updateProjLifetime(proj)
+function projLife(proj)
     if proj.lifetime then
         proj.lifetime-=1
         if proj.lifetime==0 then
@@ -122,8 +122,8 @@ function traceDummyProj(machine,callback)
 end
 
 pinkGoo={
-    impactEffectColors={8,14},
-    terrainCollision=projCollision,
+    effectColors={8,14},
+    hitTerrain=projCollision,
     numbers=
 [[gravity=0.00625
 minimapColor=14
@@ -136,8 +136,8 @@ parseNumbers(pinkGoo)
 
 blueDart={
     animIdle={right={53},diag={54},up={55}},
-    impactEffectColors={1,13},
-    terrainCollision=projCollision,
+    effectColors={1,13},
+    hitTerrain=projCollision,
     numbers=
 [[minimapColor=12
 gravity=0
@@ -148,8 +148,8 @@ hitSfx=61]]
 parseNumbers(blueDart)
 
 yellowSpark={
-    impactEffectColors={9,10},
-    terrainCollision=sparkTerrain,
+    effectColors={9,10},
+    hitTerrain=sparkTerrain,
     numbers=
 [[minimapColor=10
 gravity=0

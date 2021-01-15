@@ -1,21 +1,21 @@
 function createWaveButton(pos)
     waveButton={
         pos=pos,
-        collisionRect=rectString("-0.5,-0.5,0.5,0.5"),
+        collisionRect=unitRect,
         facing=pos.x-mapMinX<5 and -1 or 1
     }
     prepareWaveButton()
 end
 
 function prepareWaveButton()
-    waveButton.anim=startAnim(23,-1)
+    waveButton.anim=startAnim(23)
     waveButton.minimapColor=8
 end
 
 function whipWaveButton()
     if timerToSpawn<0 and spawnCount==0 then
         timerToSpawn=60
-        waveButton.anim=startAnim(24,-1)
+        waveButton.anim=startAnim(24)
         waveButton.minimapColor=-1
         sfx(40)
     end

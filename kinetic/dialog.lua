@@ -3,14 +3,15 @@ function showDialog(dialogs)
     for dialog in all(split(dialogs,'~')) do
         add(dialogChain,split(dialog,'|'))
     end
-    startDialogIndex(1)
+    dialogIndex=0
+    nextDialog()
     previousUpdate=_update60
     _update60=updateDialog
     _draw=drawDialog
 end
 
-function startDialogIndex(index)
-    dialogIndex=index
+function nextDialog()
+    dialogIndex+=1
     spriteIndex,string=unpack(dialogChain[dialogIndex])
     sfx(spriteIndex+22)
     dismissTicks=15
@@ -22,7 +23,7 @@ function updateDialog()
         dismissTicks-=1
     elseif btnp(btnJump) then
         if dialogIndex<#dialogChain then
-            startDialogIndex(dialogIndex+1)
+            nextDialog()
         else
             sfx(spriteIndex+23)
             _update60=previousUpdate
@@ -40,7 +41,7 @@ function drawDialog()
 end
 
 originalFns={}
-function wrapFnWithDialog(fnName,strings)
+function dialogFn(fnName,strings)
     if (originalFns[fnName]) return
 
     originalFns[fnName]=_ENV[fnName]

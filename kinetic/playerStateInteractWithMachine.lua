@@ -1,24 +1,24 @@
 psAdjustMachine={
     start=function()
-        _update60=updateOnlyPlayer
+        _update60=updateInput
         player.pos=getInteractPos()
         player.vel=vec2(0,0)
         player.facing=sgn(whipMachine.pos.x-player.pos.x)
-        player.anim=startAnim(pAnimAdjust,-1)
+        player.anim=startAnim(pAnimAdjust)
         adjustSpeed=0
         makeProjVis()
     end,
     stop=function()
         _update60=updateDefault
         trajLines=nil
-        trajectoryEndPoint=nil
+        trajEnd=nil
     end,
     update=function()
         if (btnp(0)) flipMachine(-1)
         if (btnp(1)) flipMachine(1)
 
         if btnp(btnJump) then
-            changeMachineType()
+            machineType()
         elseif btn(2) then
             adjustTraj(1)
         elseif btn(3) then
@@ -38,7 +38,7 @@ psAdjustMachine={
 }
 setmetatable(psAdjustMachine,ps)
 
-function changeMachineType()
+function machineType()
     sfx(28)
     typeIndex=indexOf(machineTypes,whipMachine.type)
     typeIndex+=1
@@ -73,12 +73,12 @@ function projVisCallback(proj)
         counter=0
     end
     counter+=1
-    trajectoryEndPoint=proj.pos
+    trajEnd=proj.pos
 end
 
 function makeProjVis()
     lines={}
-    trajectoryEndPoint=nil
+    trajEnd=nil
     counter=0
 
     traceDummyProj(whipMachine,projVisCallback)

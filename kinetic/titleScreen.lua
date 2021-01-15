@@ -81,7 +81,7 @@ function titleAccept()
     if option==1 then
         showLevelSelect()
     elseif option==2 then
-        showInstructions()
+        instructions()
     else
         showCredits()
     end

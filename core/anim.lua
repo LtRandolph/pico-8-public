@@ -18,7 +18,7 @@ function startAnim(anim,frameTime,dontLoop)
     anim=type(anim)=="number" and {anim} or (type(anim)=="string" and split(anim) or anim)
     animData={
         t=0,
-        frameTime=frameTime,
+        frameTime=frameTime or -1,
         sourceAnim=sourceAnim,
         anim=anim,
         dontLoop=dontLoop,

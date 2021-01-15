@@ -18,8 +18,8 @@ end
 function updateCamera()
     targetPos=player.pos-vec2(8,8)
     strength=1
-    if trajectoryEndPoint then
-        targetPos=0.3*player.pos+0.7*trajectoryEndPoint-vec2(8,8)
+    if trajEnd then
+        targetPos=0.3*player.pos+0.7*trajEnd-vec2(8,8)
         strength=0.25
     end
     cameraEasingX.strength*=strength

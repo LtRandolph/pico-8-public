@@ -1,8 +1,8 @@
 squidBasics=
-[[speed=0.015
-jumpSpeed=0.07
+[[speed=0.0125
+jumpSpeed=0.04666
 minimapColor=8
-gravity=0.006
+gravity=0.002666
 animUp=102
 animDown=103
 animLand=100,101,100
@@ -31,13 +31,13 @@ palette=5,2,3,4,5,6,7,10]]
 squidB={
     numbers=squidBasics ..
 [[deathFXColor=1
-health=4
+health=3
 palette=1,2,3,4,5,6,7,8]]
 }
 squidC={
     numbers=squidBasics ..
 [[deathFXColor=0
-health=5
+health=4
 palette=0,2,3,4,5,6,7,2]]
 }
 parseNumbers(squidA)
@@ -53,13 +53,13 @@ palette=3,2,3,4,5,6,7,7]]
 tankB={
     numbers=tankBasics ..
 [[deathFXColor=1
-health=6
+health=5
 palette=1,2,3,4,5,6,7,8]]
 }
 tankC={
     numbers=tankBasics ..
 [[deathFXColor=0
-health=8
+health=6
 palette=0,2,3,4,5,6,7,2]]
 }
 parseNumbers(tankA)
@@ -73,12 +73,13 @@ function createEnemy(def)
     local enemy={
         pos=spawnPos,
         target=targetPos,
-        anim=startAnim(def.animWalk,12),
+        anim=startAnim(def.animWalk,16),
         update=updateEnemy,
         behavior=behaveWalk,
         facing=sgn(targetPos.x-spawnPos.x),
         collisionRect=rectString("-0.375,-0.5,0.375,0.375"),
-        whipStunTicks=-90
+        whipStunTicks=-90,
+        maxHealth=def.health
     }
     absorbTable(enemy,def)
     enemy.defaultFacing=enemy.facing
@@ -91,12 +92,7 @@ end
 
 function enemyMove(enemy)
     enemy.vel.y+=enemy.gravity
-
-    posDelta,clearAxes=collideMove(getCollisionRect(enemy),enemy.vel)
-    enemy.pos+=posDelta
-
-    if (clearAxes.x!=0) enemy.vel.x=0
-    if (clearAxes.y!=0) enemy.vel.y=0
+    enemy.pos+=collideMove(collisRect(enemy),enemy.vel)
 end
 
 function updateEnemy(enemy)
@@ -116,11 +112,16 @@ end
 function drawEnemy(enemy)
     pal(split(enemy.palette))
     drawGameObject(enemy)
+    center=8*enemy.pos
     if enemy.whipStunTicks>=0 then
         theta=enemy.whipStunTicks/20
-        anchor=8*enemy.pos
-        pset(anchor.x+cos(theta)*4,anchor.y+sin(theta)-4,10)
+        pset(center.x+cos(theta)*4,center.y+sin(theta)-4,10)
     end
+    leftX=center.x-4
+    y=center.y+4
+    line(leftX+enemy.maxHealth-1,y,leftX,y,0)
+    color(8)
+    line(leftX+enemy.health-1,y)
 end
 
 function behaveWalk(enemy)
@@ -148,7 +149,7 @@ function behaveAir(enemy)
     wasGoingUp=enemy.vel.y<0
     enemyMove(enemy)
 
-    if clearAxes.y!=0 then
+    if collidedAxes.y!=0 then
         enemy.behavior=behaveLand
         enemy.landTicks=16
         enemy.anim=startAnim(enemy.animLand,6)
@@ -163,7 +164,7 @@ function behaveLand(enemy)
     enemy.landTicks-=1
     if enemy.landTicks==0 then
         enemy.vel=vec2(enemy.facing*enemy.speed,0)
-        enemy.anim=startAnim(enemy.animWalk,12)
+        enemy.anim=startAnim(enemy.animWalk,16)
         enemy.behavior=behaveWalk
     end
 end
@@ -181,7 +182,7 @@ function behavePrepJump(enemy)
         enemy.vel.x=0
         if enemy.vel.y==0 then
             enemy.facing=enemy.defaultFacing
-            enemy.behavior=behaveCrouchJump
+            enemy.behavior=behaveCrouch
             enemy.crouchTicks=30
             enemy.anim=startAnim(enemy.animCrouch,15,false)
         end
@@ -192,7 +193,7 @@ function behavePrepJump(enemy)
     enemyMove(enemy)
 end
 
-function behaveCrouchJump(enemy)
+function behaveCrouch(enemy)
     if (enemy.whipStunTicks>=0) return
 
     enemy.crouchTicks-=1
@@ -219,7 +220,7 @@ end
 function enemyJumpVel(enemy,startPos,endPos)
     offset=endPos-startPos
     t=abs(offset.x)/enemy.jumpSpeed
-    return vec2(sgn(offset.x)*enemy.jumpSpeed,offset.y/t-0.52*enemy.gravity*t)
+    return vec2(sgn(offset.x)*enemy.jumpSpeed,offset.y/t-0.5*enemy.gravity*t)
 end
 
 function enemyCheckTile(enemy)

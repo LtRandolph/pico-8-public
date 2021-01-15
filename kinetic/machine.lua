@@ -6,7 +6,7 @@ minAngle=0
 maxAngle=0]]
 }
 
-allMachineTypes={
+allMachs={
 machineBasic,
 {
     projDef=pinkGoo,
@@ -43,18 +43,18 @@ animLaunch=34,35,36]]
 }
 }
 
-foreach(allMachineTypes,parseNumbers)
-
-machineCollision=rectString("-0.375,-0.5,0.375,0.5")
+foreach(allMachs,parseNumbers)
 
 function createMachine(pos)
     machine={
         pos=pos,
-        facing=1,
+        facing=sgn(mapCenterX-pos.x),
         update=updateMachine,
-        collisionRect=machineCollision,
+        collisionRect=rectString("-0.375,-0.5,0.375,0.5"),
         minimapColor=2,
-        attackTicks=-1
+        attackTicks=-1,
+        angles={},
+        type=machineBasic
     }
     setMachineType(machine,machineBasic) 
     
@@ -62,10 +62,11 @@ function createMachine(pos)
 end
 
 function setMachineType(machine,type)
+    machine.angles[machine.type]=machine.angle
     machine.type=type
-    machine.anim=startAnim(type.animIdle,-1)
+    machine.anim=startAnim(type.animIdle)
     machine.attackTicks=type.attackCooldown and flr(rnd(type.attackCooldown)) or -1
-    setMachineAngle(machine,type.defaultAngle)
+    setMachineAngle(machine,machine.angles[type] or type.defaultAngle)
 end
 
 function setMachineAngle(machine,angle)
@@ -80,16 +81,16 @@ function updateMachine(machine)
     if machine.attackTicks==12 then
         machine.anim=startAnim(machine.type.animLaunch,4)
     elseif machine.attackTicks==0 then
-        machineLaunchAttack(machine)
+        machineAttack(machine)
     end
 
     updateAnim(machine.anim)
 end
 
-function machineLaunchAttack(machine)
+function machineAttack(machine)
     machineMakeProj(machine)
     machine.attackTicks=machine.type.attackCooldown
-    machine.anim=startAnim(machine.type.animIdle,-1)
+    machine.anim=startAnim(machine.type.animIdle)
 end
 
 function machineMakeProj(machine,isDummy)

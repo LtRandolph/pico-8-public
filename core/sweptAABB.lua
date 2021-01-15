@@ -99,7 +99,7 @@ function collideWithMap(rectangleA,aOffset,collisionFlags)
         for terrainObject in all(terrainObjects) do
             if #(terrainObject.pos-rectangleA.min)<3 then
                 collisionResult=
-                    chainCollision(rectangleA,getCollisionRect(terrainObject),aOffset,collisionResult)
+                    chainCollision(rectangleA,collisRect(terrainObject),aOffset,collisionResult)
             end
         end
     end
@@ -107,36 +107,39 @@ function collideWithMap(rectangleA,aOffset,collisionFlags)
     return unpack(collisionResult)
 end
 
-function collideMove(currentRect,remainingDelta,collisionFlags)
+function collideMove(currentRect,inVel,collisionFlags)
+    collidedAxes=vec2(0,0)
+    remainingDelta=inVel
     outDelta=vec2(0,0)
-    clearAxes=vec2(0,0)
-    collided,collideT=collideWithMap(currentRect,remainingDelta,collisionFlags)
+    collided,t,normal=collideWithMap(currentRect,remainingDelta,collisionFlags)
     while collided do
-        thisDelta=max(0,collideT-0.01)*remainingDelta
+        thisDelta=max(0,t-0.01)*remainingDelta
         outDelta+=thisDelta
         currentRect+=thisDelta
-        remainingDelta=(1-collideT)*remainingDelta
-        if (collisionResult[3].x!=0) remainingDelta.x=0 clearAxes.x=1
-        if (collisionResult[3].y!=0) remainingDelta.y=0 clearAxes.y=1
+        remainingDelta=(1-t)*remainingDelta
+        if (normal.x!=0) remainingDelta.x=0 inVel.x=0 collidedAxes.x=1
+        if (normal.y!=0) remainingDelta.y=0 inVel.y=0 collidedAxes.y=1
         if #remainingDelta>0 then
-            collided,collideT=collideWithMap(currentRect,remainingDelta,collisionFlags)
+            collided,t,normal=collideWithMap(currentRect,remainingDelta,collisionFlags)
         else
             collided=false
         end
     end
     outDelta+=remainingDelta
-    return outDelta,clearAxes
+    return outDelta
 end
 
-function getCollisionRect(gameObject)
+function collisRect(gameObject)
     return gameObject.collisionRect+gameObject.pos
 end
 
 function collideType(collider,typeList,callback,collisionRect)
-    collisionRect=collisionRect or getCollisionRect(collider)
+    collisionRect=collisionRect or collisRect(collider)
     for typeObj in all(typeList) do
-        if collisionRect:overlaps(getCollisionRect(typeObj)) then
+        if collisionRect:overlaps(collisRect(typeObj)) then
             callback(typeObj,collider)
         end
     end
 end
+
+unitRect=rectString("-0.5,-0.5,0.5,0.5")

@@ -29,8 +29,11 @@ psGrap={
         grapplePos=playerGrap.pos
         offset=player.pos-grapplePos
         grappleAngle=offset:atan()
-        whipLength=max(#offset,1.5)
-        circumference=2*pi*whipLength
+        circumference=12.566
+        if #offset > 2 then
+            offset:normalize()
+            player.pos=grapplePos+2*offset
+        end
         
         player.facing=-sgn(offset.x)
     end,
@@ -43,7 +46,7 @@ psGrap={
 
         length=#offset
         angle=offset:atan()
-        if length>whipLength then
+        if length>2 then
             oldAngle=grappleAngle
             if (abs(oldAngle-angle)>0.5) oldAngle+=(angle>oldAngle and 1 or -1)
 
@@ -52,7 +55,7 @@ psGrap={
 
             grappleAngle=oldAngle+angleTravelled*sgn(angle-oldAngle)
 
-            player.pos=grapplePos+whipLength*vec2FromAngle(grappleAngle)
+            player.pos=grapplePos+2*vec2FromAngle(grappleAngle)
             player.vel=player.pos-oldPos
         else
             grappleAngle=angle
@@ -60,11 +63,11 @@ psGrap={
 
         forwardSpeed=player.vel.x*player.facing
         if forwardSpeed>0.0125 then
-            player.anim=startAnim(pAnimGrapBack,-1)
+            player.anim=startAnim(pAnimGrapBack)
         elseif forwardSpeed<-0.0125 then
-            player.anim=startAnim(pAnimGrapForward,-1)
+            player.anim=startAnim(pAnimGrapForward)
         else
-            player.anim=startAnim(pAnimGrapUp,-1)
+            player.anim=startAnim(pAnimGrapUp)
         end
     end,
     checkTransition=function()
